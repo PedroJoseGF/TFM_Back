@@ -19,7 +19,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = ['http://127.0.0.1:5173', 'http://localhost:5173'];
+const allowedOrigins = ['http://127.0.0.1:5173', 'http://localhost:5173', 'https://tfm-front-6sztmixpp-pedrojosegfs-projects.vercel.app'];
 
 app.use(cors({
     origin: function(origin, callback) {
