@@ -30,7 +30,7 @@ const sendWelcomeEmail = async (data) => {
     const mailOptions = {
         from: config.EMAIL_USER,
         to: email,
-        subject: 'Bienvenido a TaskPlanner',
+        subject: 'Bienvenido a Mi Ayuntamiento',
         html: templateEmail.welcomeEmail(_id, name + ' ' + surname, role),
         attachments: [
             {
