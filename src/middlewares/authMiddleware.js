@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
         token = req.cookies.token;
      }
 
-     if(!token) {
+     if (!token) {
         console.log('No se encontró token en cookies firmadas');
         return res.status(401).json({
             sucess: "NOK",

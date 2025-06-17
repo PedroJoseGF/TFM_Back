@@ -1,10 +1,53 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
-async function getUsers() {
+async function getUsers(filters) {
     try {
         let users = [];
-        users = await User.find();
+        if (Object.keys(filters).length !== 0) {
+            if(filters.enabled === "") {
+                users = await User.aggregate([
+                    {
+                        $addFields: {
+                            nameFilter: {
+                                $concat: ["$name", " ", "$surname"],
+                            },
+                        },
+                    },
+                    {
+                        $match: {
+                            $and: [
+                                { nameFilter: { $regex: filters.name, $options: "i" } },
+                                { email: { $regex: filters.email, $options: "i" } },
+                                { dni: { $regex: filters.dni, $options: "i" } },
+                            ],
+                        },
+                    }
+                ]);
+            } else {
+                users = await User.aggregate([
+                    {
+                        $addFields: {
+                            nameFilter: {
+                                $concat: ["$name", " ", "$surname"],
+                            },
+                        },
+                    },
+                    {
+                        $match: {
+                            $and: [
+                                { nameFilter: { $regex: filters.name, $options: "i" } },
+                                { email: { $regex: filters.email, $options: "i" } },
+                                { dni: { $regex: filters.dni, $options: "i" } },
+                                { enabled: filters.enabled }
+                            ],
+                        },
+                    }
+                ]);
+            }
+        } else {
+            users = await User.find();
+        }
         return users;
     } catch (err) {
         console.error('Error al obtener usuarios:', err);

@@ -8,7 +8,7 @@ const validateResult = (req, res, next) => {
     next();
 };
 
-const createAdvertisementValidations = [
+const createAnnouncementValidations = [
     body('title')
         .notEmpty()
         .withMessage('El título es requerido')
@@ -36,7 +36,7 @@ const createAdvertisementValidations = [
     validateResult
 ];
 
-const updateAdvertisementValidations = [
+const updateAnnouncementValidations = [
     body('title')
         .notEmpty()
         .withMessage('El título es requerido')
@@ -64,7 +64,7 @@ const updateAdvertisementValidations = [
     validateResult
 ];
 
-const getAdvertisementValidations = [
+const getAnnouncementValidations = [
     param('id')
         .optional()
         .isMongoId()
@@ -73,4 +73,4 @@ const getAdvertisementValidations = [
     validateResult
 ];
 
-module.exports = { createAdvertisementValidations, updateAdvertisementValidations, getAdvertisementValidations };
+module.exports = { createAnnouncementValidations, updateAnnouncementValidations, getAnnouncementValidations };

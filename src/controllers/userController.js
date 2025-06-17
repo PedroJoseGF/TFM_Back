@@ -6,7 +6,8 @@ const userController = {
         ...getUserValidations,
         async (req, response) => {
             try {
-                const data = await userService.getUsers();
+                const filterUsers = req.body;
+                const data = await userService.getUsers(filterUsers);
                 response.status(200).json(data);
             } catch(e) {
                 console.log('Error al recoger los usuarios de la BBDD', e);
