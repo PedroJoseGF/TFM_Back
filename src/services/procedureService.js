@@ -1,10 +1,20 @@
 const Procedure = require('../models/Procedure');
-const User = require('../models/User');
 
-async function getProcedures() {
+async function getProcedures(filters) {
     try {
         let procedures = [];
-        procedures = await Procedure.find();
+        if (Object.keys(filters).length !== 0) {
+            procedures = await Procedure.find({
+                $and: [
+                    { title: { $regex: filters.title, $options: "i" } },
+                    { proceeding: { $regex: filters.proceeding, $options: "i" } },
+                    { type: { $regex: filters.type, $options: "i" } },
+                    { status: { $regex: filters.status, $options: "i" } },
+                ],
+            });
+        } else {
+            procedures = await Procedure.find();
+        }
         return procedures;
     } catch (err) {
         console.error('Error al obtener los expedientes:', err);

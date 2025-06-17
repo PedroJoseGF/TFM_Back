@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const advertisementSchema = new mongoose.Schema({
+const announcementSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -32,4 +32,4 @@ const advertisementSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Advertisement', advertisementSchema);
+module.exports = mongoose.model('Announcement', announcementSchema);

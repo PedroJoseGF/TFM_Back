@@ -4,7 +4,8 @@ const fileService = require('../services/fileService');
 
 async function getProceduresController(req, response) {
     try {
-        let data = await procedureService.getProcedures();
+        const filterProcedures = req.body;
+        let data = await procedureService.getProcedures(filterProcedures);
         response.status(200).json(data);
     } catch(e) {
         console.log('Error al recoger los trámites de la BBDD', e);

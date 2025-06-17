@@ -4,7 +4,7 @@ const authRoutes = require('./routes/authRoutes');
 const fileRoutes = require('./routes/fileRoutes');
 const emailRoutes = require('./routes/emailRoutes');
 const userRoutes = require('./routes/userRoutes');
-const advertisementRoutes = require('./routes/advertismentsRoutes');
+const announcementRoutes = require('./routes/announcementsRoutes');
 const procedureRoutes = require('./routes/procedureRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const verifyToken = require('./middlewares/authMiddleware');
@@ -45,7 +45,7 @@ app.use(mongoSanitize());
 
 const apiLimiter = rateLimit({ 
     windowMs: 15 * 60 * 1000,
-    max: 100,
+    max: 200,
     message: 'Demasiadas peticiones desde esta IP'
 });
 
@@ -54,7 +54,7 @@ app.use('/', apiLimiter);
 app.use('/api/auth', authRoutes);
 app.use('/api/email', verifyToken, emailRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/advertisements', advertisementRoutes);
+app.use('/api/announcements', announcementRoutes);
 app.use('/api/procedures', verifyToken, procedureRoutes);
 app.use('/api/notifications', verifyToken, notificationRoutes);
 app.use('/api/files', fileRoutes);
