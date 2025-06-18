@@ -34,30 +34,8 @@ async function createdProcedure(req, response) {
         }
         data = await procedureService.updateProcedure(newProcedure._id, newProcedure);
 
-        let title = '';
-        switch (req.body.type) {
-            case "claims":
-                title = "queja o reclamación";
-                break;
-            
-            case "majorWorksLicense":
-                title = "solicitud de Licencia de Obra Mayor.";
-                break;
-            
-            case "executionMinorWorks":
-                title = "declaración Responsable Ejecución Obras Menores.";
-                break;
-            
-            case "populationRegister":
-                title = "reclamción del padrón de habitantes.";
-                break;
-
-            default:
-                title = "un trámite.";
-        }
-
         let notification = {
-            "title": "Creación de " + title,
+            "title": "Creación de " + newProcedure.title.toLocaleLowerCase(),
             "content": {
                 "proceeding": newProcedure.proceeding,
                 ...req.body
